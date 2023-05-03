@@ -2,11 +2,9 @@ import React from "react";
 import { TextInput, Button, withTheme } from "react-native-paper";
 import { Text, View, StyleSheet, Image } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-
-const Stack = createStackNavigator();
 const logo = require("../components/pD.png");
 
-function Login({ navigation, theme }) {
+function Login({ navigation }) {
   return (
     <View style={styles.login}>
       <Image source={logo} style={styles.logo} />
