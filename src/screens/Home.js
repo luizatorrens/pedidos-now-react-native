@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Avatar, Button, Card, Text, IconButton, MD3Colors } from "react-native-paper";
+import { Avatar, Button, Card, Text, FAB } from "react-native-paper";
 
 function CardCardapio() {
   return (
@@ -17,22 +17,27 @@ function CardCardapio() {
 
 function Home({ navigation }) {
   return (
-    <ScrollView>
 
     <View style={styles.container}>
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-      <CardCardapio />
-    </View>
-    </ScrollView>
+      <ScrollView>
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+        <CardCardapio />
+      </ScrollView>
+      <FAB
+    icon="plus"
+    style={styles.fab}
+    onPress={() => console.log('Pressed')}
+  />
+      </View>
   );
 }
 
@@ -42,13 +47,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
     width: "100%",
   },
   card: {
-    width: "80%",
+    width: "100%",
     padding: 30
-  }
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
 
 });
 export default Home;
