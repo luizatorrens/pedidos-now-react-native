@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { Avatar, Provider,  Portal, Modal, Card, Text, FAB } from "react-native-paper";
+import { Avatar, Provider,  Portal, Modal, Card, Text, FAB, TextInput, Button } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -9,9 +9,9 @@ function CardCardapio() {
   return (
     <Card>
       <Card.Title
-        title="Chawarma"
-        subtitle="Pão Sírio, Batata Frita, Carne, Molho"
-        left={(props) => <Avatar.Icon {...props} icon="folder" />}
+        title="#item cardapio"
+        subtitle="Pão sírio, batata frita, carne, molho"
+        left={(props) => <Avatar.Image size={45} source={require('../components/schawarma.jpg')} />}
         style={styles.card}
       />
     </Card>
@@ -20,6 +20,7 @@ function CardCardapio() {
 
 function Home({ navigation }) {
   const [visible, setVisible] = React.useState(false);
+  const [text, setText] = React.useState("");
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -30,7 +31,17 @@ function Home({ navigation }) {
     <View style={styles.container}>
       <Portal>
       <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
-        <Text>Novo pedido aqui</Text>
+      <TextInput
+      label="Novo Pedido"
+      value={text}
+      onChangeText={text => setText(text)}
+    />
+    <Button
+    style={{marginTop: 20}}
+    icon="arrow-right"
+    mode="contained"
+    onPress={() => console.log('Pressed')}
+  />
       </Modal>
       </Portal>
       <ScrollView>
