@@ -60,7 +60,7 @@ function Home({ navigation }) {
       <ScrollView>
         <ListaItens />
       </ScrollView>
-      <FAB icon="plus" style={styles.fab} onPress={showModal} />
+      <FAB icon="plus" style={styles.fab} onPress={showModal} color= "white" />
     </View>
     </Provider>
   );
@@ -70,25 +70,19 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 40,
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     justifyContent: "center",
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: "center",
     width: "100%",
   },
-  card: {
-    width: "100%",
-    padding: 0,
-    backgroundColor: '#FFFBFB',
-  },
   fab: {
     position: "absolute",
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: '#F5C4C4',
-    iconColor: 'black',
+    backgroundColor: '#d32f2f',
     
   },
 });

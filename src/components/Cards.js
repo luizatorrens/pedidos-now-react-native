@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView, StyleSheet, Text, Image } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import Item from "./Itens";
 
   const itens = [
@@ -54,11 +54,11 @@ const ListaItens = () => {
 
   return (
     <ScrollView style={styles.scroll}>
-    <View style={styles.conteudo}>
-      {itensList.map((item, index) => (
-        <Item key={index} item={item} />
-      ))}
-    </View>
+        <View style={styles.conteudo}>
+        {itensList.map((item, index) => (
+            <Item key={index} item={item} style={styles.item} />
+        ))}
+        </View>
     </ScrollView>
   );
 };
@@ -71,8 +71,6 @@ const styles = StyleSheet.create({
   conteudo: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-   // width: '100%',
-   // justifyContent: "space-between",
   },
 });
 
