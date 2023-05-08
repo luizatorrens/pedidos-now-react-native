@@ -1,18 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import {Avatar, Card} from "react-native-paper";
+import { Text, StyleSheet } from "react-native";
+import { Avatar, Card } from "react-native-paper";
 
 
 const Item = ({ item }) => {
   return (
     <Card style={styles.card}>
-      <View style={styles.textos}>
-      <Avatar.Image size={60} style={styles.icone} source={require('../components/schawarma.jpg')}/>
-        <Text style={styles.text1}>{item.nome}</Text>
-        <Text style={styles.text2}>{item.ingredientes}</Text>
-        <Text style={styles.text3}>{item.quantidade}</Text>
-        <Text style={styles.text4}>R${item.preco}</Text>
-      </View>
+      <Avatar.Image size={60} source={require('../components/schawarma.jpg')}/>
+        <Text style={styles.nome}>{item.nome}</Text>
+        <Text style={styles.descricao}>{item.ingredientes}</Text>
+        <Text style={styles.descricao}>{item.quantidade}</Text>
+        <Text style={styles.descricao}>R${item.preco}</Text>
       </Card>
   );
 };
@@ -24,23 +22,15 @@ const styles = StyleSheet.create({
     margin: 3,
     padding: 20
   },
-  text1: {
+  nome: {
     fontSize: 20,
     marginBottom: 10,
     color: "black",
   },
-  text2: {
+  descricao: {
     fontSize: 16,
     color: "black",
   },
-  text3: {
-    fontSize: 16,
-    color: "black",
-  },
-  text4: {
-    fontSize: 16,
-    color: 'black',
-  }
 });
 
 export default Item;

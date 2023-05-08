@@ -4,6 +4,7 @@ import Item from "./Itens";
 
   const itens = [
     {
+      imagem: '../components/schawarma.jpg',
       nome: 'Chawarma de Frango',
       ingredientes: 'Pão Sírio, Creme de Alho, Alface, Tomate e Frango',
       quantidade: '600g',
@@ -53,10 +54,10 @@ const ListaItens = () => {
   const [itensList] = useState(itens);
 
   return (
-    <ScrollView style={styles.scroll}>
+    <ScrollView>
         <View style={styles.conteudo}>
         {itensList.map((item, index) => (
-            <Item key={index} item={item} style={styles.item} />
+            <Item key={index} item={item} />
         ))}
         </View>
     </ScrollView>
@@ -64,10 +65,6 @@ const ListaItens = () => {
 };
 
 const styles = StyleSheet.create({
-  scroll: {
-    padding: 5,
-    backgroundColor: "white",
-  },
   conteudo: {
     flexDirection: 'row',
     flexWrap: 'wrap',
