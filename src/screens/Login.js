@@ -4,18 +4,24 @@ import { Text, View, StyleSheet, Image } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 const logo = require("../components/pD.png");
 
+
 function Login({ navigation }) {
   return (
     <View style={styles.login}>
       <Image source={logo} style={styles.logo} />
       <TextInput
         label="Email"
+        backgroundColor="transparent"
         mode="outlined"
+        activeOutlineColor="#d32f2f"
+        selectionColor="#d32f2f"
         right={<TextInput.Affix text="/100" />}
         style={styles.caixaTexto}
       />
       <TextInput
         label="Password"
+        activeOutlineColor="#d32f2f"
+        selectionColor="#d32f2f"
         secureTextEntry
         mode="outlined"
         right={<TextInput.Icon icon="eye" />}
@@ -37,7 +43,7 @@ function Login({ navigation }) {
 const styles = StyleSheet.create({
   login: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
@@ -51,7 +57,8 @@ const styles = StyleSheet.create({
   },
 
   caixaTexto: {
-    width: '100%'
+    width: '100%',
+    backgroundColor: 'white'
   },
 
   logo: {
