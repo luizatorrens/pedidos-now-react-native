@@ -1,11 +1,11 @@
 import React from "react";
 import { TextInput, Button, withTheme } from "react-native-paper";
 import { Text, View, StyleSheet, Image } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 const logo = require("../components/pD.png");
 
 
 function Login({ navigation }) {
+  const [viewPassword, setViewPassword] = React.useState(false)
   return (
     <View style={styles.login}>
       <Image source={logo} style={styles.logo} />
@@ -22,9 +22,9 @@ function Login({ navigation }) {
         label="Password"
         activeOutlineColor="#d32f2f"
         selectionColor="#d32f2f"
-        secureTextEntry
+        secureTextEntry={viewPassword}
         mode="outlined"
-        right={<TextInput.Icon icon="eye" />}
+        right={<TextInput.Icon icon={viewPassword? "eye-off" :"eye"} onPress={()=>setViewPassword(!viewPassword)}/>}
         style={styles.caixaTexto}
       />
       <Button
