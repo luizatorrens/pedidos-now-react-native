@@ -32,7 +32,7 @@ function Login({ navigation }) {
         icon="arrow-right"
         textColor='white'
         mode="contained-tonal"
-        onPress={() => navigation.navigate("Main")}
+        onPress={() => navigation.navigate("Home")}
       >
         Acessar
       </Button>

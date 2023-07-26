@@ -6,11 +6,9 @@ import { Avatar, Card } from "react-native-paper";
 const Item = ({ item }) => {
   return (
     <Card style={styles.card}>
-      <Avatar.Image size={60} source={require('../components/schawarma.jpg')}/>
         <Text style={styles.nome}>{item.nome}</Text>
-        <Text style={styles.descricao}>{item.ingredientes}</Text>
-        <Text style={styles.descricao}>{item.quantidade}</Text>
-        <Text style={styles.descricao}>R${item.preco}</Text>
+        <Text style={styles.descricao}>{item.mesa}</Text>
+
       </Card>
   );
 };

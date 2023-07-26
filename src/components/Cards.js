@@ -4,49 +4,41 @@ import Item from "./Itens";
 
   const itens = [
     {
-      imagem: '../components/schawarma.jpg',
-      nome: 'Chawarma de Frango',
-      ingredientes: 'Pão Sírio, Creme de Alho, Alface, Tomate e Frango',
-      quantidade: '600g',
-      preco: '39,90'
+
+      nome: 'Ana',
+      mesa: 'Mesa 1',
+
     },
     {
-      nome: 'Chawarma de Carne',
-      ingredientes: 'Pão Sírio, Creme de Alho, Alface, Tomate e Carne',
-      quantidade: '600g',
-      preco: '39,90'
+      nome: 'Camila',
+      mesa: 'Mesa 5',
+
     },
     {
-      nome: 'Chawarma de Coração',
-      ingredientes: 'Pão Sírio, Creme de Alho, Alface, Tomate e Coração',
-      quantidade: '600g',
-      preco: '40,00'
+      nome: 'Luiza',
+      mesa: 'Mesa 10',
+
     },
     {
-      nome: 'Chawarma Misto',
-      ingredientes: 'Pão Sírio, Creme de Alho, Alface, Tomate, Carne e Frango',
-      quantidade: '600g',
-      preco: '35,00'
+      nome: 'Amanda',
+      mesa: 'Mesa 3',
+
     },
     {
-      nome: 'Porção de Batata Frita',
-      quantidade: '700g',
-      preco: '35,00'
+      nome: 'Luiz',
+      mesa: 'Mesa 10',
     },
     {
-      nome: 'Porção de Batata Frita e Calabresa',
-      quantidade: '700g',
-      preco: '40,00'
+      nome: 'Eduardo',
+      mesa: 'Mesa 7',
     },
     {
-      nome: 'Coca-Cola em Lata',
-      quantidade: '500ml',
-      preco: '5,00'
+      nome: 'Larissa',
+      mesa: 'Mesa 8',
     },
     {
-      nome: 'Guaraná em Lata',
-      quantidade: '500ml',
-      preco: '5,00'
+      nome: 'Fabio',
+      mesa: 'Mesa 2',
     },
   ];
 

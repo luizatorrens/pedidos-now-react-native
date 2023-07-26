@@ -13,9 +13,9 @@ export default function Main() {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} options={{
           headerShown: false,
-          tabBarLabel: 'Cardápio',
+          tabBarLabel: 'Pedidos',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="food" color={color} size={size} />
+            <MaterialCommunityIcons name="checkbox-multiple-marked-outline" color={color} size={size} />
           ),
         }}/>
       <Tab.Screen name="Pedidos" component={Pedidos} options={{
