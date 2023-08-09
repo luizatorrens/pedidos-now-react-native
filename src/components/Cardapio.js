@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import { Avatar, Card } from "react-native-paper";
+import { Card } from "react-native-paper";
 
 
 const Item = ({ item }) => {

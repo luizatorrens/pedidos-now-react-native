@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput, Button, withTheme } from "react-native-paper";
 import { Text, View, StyleSheet, Image } from "react-native";
-const logo = require("../components/pD.png");
+const logo = require("../components/PedidosNOW.png");
 
 
 function Login({ navigation }) {

@@ -18,13 +18,6 @@ export default function Main() {
             <MaterialCommunityIcons name="checkbox-multiple-marked-outline" color={color} size={size} />
           ),
         }}/>
-      <Tab.Screen name="Pedidos" component={Pedidos} options={{
-          headerShown: false,
-          tabBarLabel: 'Pedidos',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="checkbox-multiple-marked-outline" color={color} size={size} />
-          ),
-        }}/>
     </Tab.Navigator>
   );
 }

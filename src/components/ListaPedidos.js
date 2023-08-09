@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import Item from "./Itens";
+import Pedido from "./Pedidos.js";
 
-  const itens = [
+  const pedidos = [
     {
 
       nome: 'Ana',
@@ -42,14 +42,14 @@ import Item from "./Itens";
     },
   ];
 
-const ListaItens = () => {
-  const [itensList] = useState(itens);
+const ListaPedidos = () => {
+  // const [pedidosList] = useState(pedidos);
 
   return (
     <ScrollView>
         <View style={styles.conteudo}>
-        {itensList.map((item, index) => (
-            <Item key={index} item={item} />
+        {pedidos.map((pedido, index) => (
+            <Pedido key={index} pedido={pedido} />
         ))}
         </View>
     </ScrollView>
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListaItens;
+export default ListaPedidos;
