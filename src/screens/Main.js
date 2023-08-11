@@ -7,11 +7,17 @@ import Pedidos from './Pedidos';
 
 const Tab = createBottomTabNavigator();
 
-
 export default function Main() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} options={{
+          headerShown: false,
+          tabBarLabel: 'Novo Pedido',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="food" color={color} size={size} />
+          ),
+        }}/>
+      <Tab.Screen name="Pedidos" component={Pedidos} options={{
           headerShown: false,
           tabBarLabel: 'Pedidos',
           tabBarIcon: ({ color, size }) => (
