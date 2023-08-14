@@ -1,46 +1,29 @@
-import * as React from 'react';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { StyleSheet, Button, Text, View } from 'react-native';
-//import * as SecureStore from 'expo-secure-store';
-
-import ProdutosApi from '../api/Produtos';
-const produtosApi = new ProdutosApi();
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import produtosapi from '../api/produtos';
 
 function Cardapio() {
-  const setUser = useSetRecoilState(userState);
-  const currentUserState = useRecoilValue(userState);
-  const [produtos, setProdutos] = React.useState([]);
+  const [produtos, setProdutos] = useState([]);
 
-  React.useEffect(() => {
-    const bootstrapAsync = async () => {
-      const data = await produtosApi.getProdutos();
-      setProdutos(data);
-    };
-
-    bootstrapAsync();
+  useEffect(() => {
+    fetch(`${produtosapi}/produtos`)  // Supondo que a rota "/produtos" seja definida em sua API
+      .then(response => response.json())
+      .then(data => {
+        setProducts(data);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar produtos:', error);
+      });
   }, []);
 
   return (
     <View>
-      <Text>Hello Home</Text>
-      <Text>{currentUserState.access_token}</Text>
-      {produtos.map((produto) => (
-        <Text key={produto.id}>
-          {produto.title} - {produto.preco}
-        </Text>
+      <Text>Cardápio</Text>
+      {produtos.map(produto => (
+        <Text key={produto.id}>{produto.name}</Text>
       ))}
     </View>
   );
-
-  };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+}
 
 export default Cardapio;
