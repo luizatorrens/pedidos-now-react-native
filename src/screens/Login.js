@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
   },
 
   caixaTexto: {
-    width: '100%',
+   width: '100%',
     backgroundColor: 'white'
-  },
+  }, 
 
   logo: {
     width: 250,

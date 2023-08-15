@@ -32,7 +32,7 @@ function Home({ navigation }) {
         style={styles.caixaTexto}
       />
       <Button
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 10, width: '100%' }}
         buttonColor="#d32f2f"
         icon="arrow-right"
         mode="contained"
@@ -45,25 +45,18 @@ function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "white",
     justifyContent: "center",
-    flexDirection: "row",
-    flexWrap: "wrap",
     alignItems: "center",
-    width: "100%",
-  },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
-    backgroundColor: "#d32f2f",
+    padding: 20,
+    width: '100%',
   },
   caixaTexto: {
     width: '100%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginLeft: 30,
+    marginRight: 30
   },
 });
 export default Home;

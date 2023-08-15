@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const categoriaapi = axios.create({
-  baseURL: 'http://127.0.0.1:8000/produtos/'
+  baseURL: 'http://191.52.55.56:19000/categoria/'
 })
 
 export default categoriaapi
