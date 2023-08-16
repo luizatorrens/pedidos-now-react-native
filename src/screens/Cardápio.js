@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, } from 'react-native';
 import produtosapi from '../api/produtos';
-import { Checkbox } from 'react-native-paper';
+import { Checkbox, Button } from 'react-native-paper';
 import axios from 'axios';
 
 function Cardapio() {
@@ -29,9 +29,9 @@ function Cardapio() {
 
   return (
     <View>
-      <Text>Cardápio</Text>
+      <Text style={styles.titulo}>Cardápio</Text>
       {produtos.map((produtos, i) => (
-      <View>
+      <View style={styles.produtos} >
         <Checkbox.Item 
           label={produtos.titulo}
           status={checked[i] ? 'checked' : 'unchecked'} 
@@ -40,8 +40,27 @@ function Cardapio() {
             }} />
       </View>
       ))}
+
+      <Button
+        style={{ marginTop: 10, marginHorizontal: 15}}
+        buttonColor="#d32f2f"
+        icon="arrow-right"
+        mode="contained"
+      />
     </View>
   );
 }
 
 export default Cardapio;
+
+const styles = StyleSheet.create({
+  produtos: {
+    margin: 10
+  },
+  titulo: {
+    marginTop: 40,
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold'
+  }
+});
