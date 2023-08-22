@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, } from 'react-native';
-import produtosapi from '../api/produtos';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Checkbox, Button } from 'react-native-paper';
 import axios from 'axios';
 
 function Cardapio() {
+  const Tab = createMaterialTopTabNavigator();
   const [produtos, setData] = useState([]);
   const [checked, setChecked] = React.useState([]);
 
@@ -28,6 +29,7 @@ function Cardapio() {
   }, []);
 
   return (
+    <Tab.Navigator>
     <View>
       <Text style={styles.titulo}>Cardápio</Text>
       {produtos.map((produtos, i) => (
@@ -41,6 +43,11 @@ function Cardapio() {
       </View>
       ))}
 
+
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+
+
       <Button
         style={{ marginTop: 10, marginHorizontal: 15}}
         buttonColor="#d32f2f"
@@ -48,6 +55,7 @@ function Cardapio() {
         mode="contained"
       />
     </View>
+    </Tab.Navigator>
   );
 }
 
