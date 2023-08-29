@@ -1,61 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { Checkbox, Button } from 'react-native-paper';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { Checkbox, Button, List } from "react-native-paper";
+import produtosApi from "../api/produtos";
 
 function Cardapio() {
-  const Tab = createMaterialTopTabNavigator();
-  const [produtos, setData] = useState([]);
-  const [checked, setChecked] = React.useState([]);
-
-  function changeCheck(i) {
-    let novoChecked = [...checked]
-    novoChecked[i] = !novoChecked[i]
-    setChecked(novoChecked);
+  const [chawarmas, setChawarmas] = useState([]);
+  const [checkedChawarmas, setCheckedChawarmas] = React.useState([]);
+  function changeCheckChawarmas(i) {
+    let novoChecked = [...checked];
+    novoChecked[i] = !novoChecked[i];
+    setCheckedChawarmas(novoChecked);
   }
 
   useEffect(() => {
-    
-    async function fetchData()  {
-      const {data}  = await axios.get('http://191.52.55.56:19003/produtos/');
-      setData(data);
-      let novoChecked = []
-      data.map(() => novoChecked.push(false))
-      setChecked(novoChecked)
+    async function fetchData() {
+      const data = await produtosApi.buscarTodosOsProdutos();
+      
+      const dataChawarmas = data.filter(d => d.categoria === 'Chawarma')
+      setChawarmas(dataChawarmas)
+      let novoChecked = [];
+      dataChawarmas.map(() => novoChecked.push(false));      
+      setCheckedChawarmas(novoChecked);
+
+
     }
-    
+
     fetchData();
   }, []);
 
   return (
-    <Tab.Navigator>
     <View>
       <Text style={styles.titulo}>Cardápio</Text>
-      {produtos.map((produtos, i) => (
-      <View style={styles.produtos} >
-        <Checkbox.Item 
-          label={produtos.titulo}
-          status={checked[i] ? 'checked' : 'unchecked'} 
-          onPress={() => {
-            changeCheck(i)            
-            }} />
-      </View>
-      ))}
-
-
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-
+      <List.AccordionGroup>
+        <List.Accordion title="Bebidas" id="1">
+            <List.Item title="Item 3" />
+        </List.Accordion>
+        <List.Accordion title="Chawarmas" id="2">
+        {chawarmas.map((chawarmas, i) => (
+            <View style={styles.chawarmas}>
+              <Checkbox.Item
+                label={chawarmas.titulo}
+                status={checkedChawarmas[i] ? "checked" : "unchecked"}
+                onPress={() => {
+                  changeCheckChawarmas(i);
+                }}
+              />
+            </View>
+          ))}
+        </List.Accordion>        
+      </List.AccordionGroup>
 
       <Button
-        style={{ marginTop: 10, marginHorizontal: 15}}
+        style={{ marginTop: 10, marginHorizontal: 15 }}
         buttonColor="#d32f2f"
         icon="arrow-right"
         mode="contained"
       />
     </View>
-    </Tab.Navigator>
   );
 }
 
@@ -63,12 +64,12 @@ export default Cardapio;
 
 const styles = StyleSheet.create({
   produtos: {
-    margin: 10
+    margin: 10,
   },
   titulo: {
     marginTop: 40,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 24,
-    fontWeight: 'bold'
-  }
+    fontWeight: "bold",
+  },
 });

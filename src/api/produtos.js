@@ -1,8 +1,10 @@
-import axios from 'axios';
+import api from "../plugins/axios";
 
+class ProdutosApi {
+  async buscarTodosOsProdutos()  {
+    const { data } = await api.get('produtos/');
+    return data    
+  }
+}
 
-const produtosapi = axios.create({
-  baseURL: 'http://191.52.55.56:19003/produtos/'
-})
-
-export default produtosapi
+export default new ProdutosApi
