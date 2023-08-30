@@ -7,9 +7,17 @@ function Cardapio() {
   const [chawarmas, setChawarmas] = useState([]);
   const [checkedChawarmas, setCheckedChawarmas] = React.useState([]);
   function changeCheckChawarmas(i) {
-    let novoChecked = [...checked];
+    let novoChecked = [...checkedChawarmas];
     novoChecked[i] = !novoChecked[i];
     setCheckedChawarmas(novoChecked);
+  }
+
+  const [bebidas, setBebidas] = useState([]);
+  const [checkedBebidas, setCheckedBebidas] = React.useState([]);
+  function changeCheckBebidas(i) {
+    let novoChecked = [...checkedBebidas];
+    novoChecked[i] = !novoChecked[i];
+    setCheckedBebidas(novoChecked);
   }
 
   useEffect(() => {
@@ -22,6 +30,12 @@ function Cardapio() {
       dataChawarmas.map(() => novoChecked.push(false));      
       setCheckedChawarmas(novoChecked);
 
+      const dataBebidas = data.filter(d => d.categoria === 'Bebida')
+      setBebidas(dataBebidas)
+      novoChecked = [];
+      dataBebidas.map(() => novoChecked.push(false));      
+      setCheckedBebidas(novoChecked);
+
 
     }
 
@@ -33,7 +47,17 @@ function Cardapio() {
       <Text style={styles.titulo}>Cardápio</Text>
       <List.AccordionGroup>
         <List.Accordion title="Bebidas" id="1">
-            <List.Item title="Item 3" />
+        {bebidas.map((bebidas, i) => (
+            <View style={styles.bebidas}>
+              <Checkbox.Item
+                label={bebidas.titulo}
+                status={checkedBebidas[i] ? "checked" : "unchecked"}
+                onPress={() => {
+                  changeCheckBebidas(i);
+                }}
+              />
+            </View>
+          ))}
         </List.Accordion>
         <List.Accordion title="Chawarmas" id="2">
         {chawarmas.map((chawarmas, i) => (
