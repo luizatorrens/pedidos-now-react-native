@@ -79,7 +79,7 @@ function Cardapio() {
         buttonColor="#d32f2f"
         icon="arrow-right"
         mode="contained"
-      />
+        />
     </View>
   );
 }
