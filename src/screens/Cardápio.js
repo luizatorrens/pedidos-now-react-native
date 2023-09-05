@@ -20,6 +20,14 @@ function Cardapio() {
     setCheckedBebidas(novoChecked);
   }
 
+  const [porcoes, setPorcoes] = useState([]);
+  const [checkedPorcoes, setCheckedPorcoes] = React.useState([]);
+  function changeCheckPorcoes(i) {
+    let novoChecked = [...checkedPorcoes];
+    novoChecked[i] = !novoChecked[i];
+    setCheckedPorcoes(novoChecked);
+  }
+
   useEffect(() => {
     async function fetchData() {
       const data = await produtosApi.buscarTodosOsProdutos();
@@ -36,6 +44,11 @@ function Cardapio() {
       dataBebidas.map(() => novoChecked.push(false));      
       setCheckedBebidas(novoChecked);
 
+      const dataPorcoes = data.filter(d => d.categoria === 'Porção')
+      setPorcoes(dataPorcoes)
+      novoChecked = [];
+      dataPorcoes.map(() => novoChecked.push(false));      
+      setCheckedPorcoes(novoChecked);
 
     }
 
@@ -72,6 +85,19 @@ function Cardapio() {
             </View>
           ))}
         </List.Accordion>        
+        <List.Accordion title="Porções" id="3">
+        {porcoes.map((porcoes, i) => (
+            <View style={styles.porcoes}>
+              <Checkbox.Item
+                label={porcoes.titulo}
+                status={checkedPorcoes[i] ? "checked" : "unchecked"}
+                onPress={() => {
+                  changeCheckPorcoes(i);
+                }}
+              />
+            </View>
+          ))}
+        </List.Accordion>  
       </List.AccordionGroup>
 
       <Button
