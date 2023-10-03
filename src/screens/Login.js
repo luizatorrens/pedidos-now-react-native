@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from 'react';
-import { TextInput, Button, withTheme, Text } from "react-native-paper";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { TextInput, Button } from "react-native-paper";
+import { View, StyleSheet, Image } from "react-native";
 const logo = require("../components/PedidosNOW.png");
 import * as SecureStore from 'expo-secure-store';
 import { useSetRecoilState } from 'recoil';
@@ -10,6 +10,7 @@ import loginApi from '../services/login';
 import { userState } from '../recoil/atoms/auth';
 
 export default function Login({ navigation }) {
+  const [viewPassword, setViewPassword] = React.useState(false)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState(null);
@@ -28,7 +29,7 @@ export default function Login({ navigation }) {
       setPassword('');
       setErrorMsg(null);
       await SecureStore.setItemAsync('access', data.access);
-      navigation.goBack();
+      navigation.navigate('Main');
     } catch (error) {
       setUser({ loggedIn: false, access: null, refresh: null });
       setErrorMsg('Usuário ou senha inválidos!');
@@ -101,4 +102,3 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-

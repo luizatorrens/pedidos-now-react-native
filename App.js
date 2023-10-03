@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RecoilRoot } from 'recoil';
 
 import Login from './src/screens/Login';
 import Main from './src/screens/Main';
@@ -7,7 +8,7 @@ import Cardapio from './src/screens/Cardápio';
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+function MainDrawer() {
   return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Login'>
@@ -16,5 +17,13 @@ export default function App() {
           <Stack.Screen name="Cardapio" component={Cardapio} options={{ headerShown: false }}/>
         </Stack.Navigator>
       </NavigationContainer>
+  );
+}
+
+export default function App() {
+  return (
+    <RecoilRoot>
+      <MainDrawer />
+    </RecoilRoot>
   );
 }
