@@ -1,16 +1,48 @@
 import React from "react";
-import { TextInput, Button, withTheme } from "react-native-paper";
+import { useState } from 'react';
+import { TextInput, Button, withTheme, Text } from "react-native-paper";
 import { Text, View, StyleSheet, Image } from "react-native";
 const logo = require("../components/PedidosNOW.png");
+import * as SecureStore from 'expo-secure-store';
+import { useSetRecoilState } from 'recoil';
 
+import loginApi from '../services/login';
+import { userState } from '../recoil/atoms/auth';
 
-function Login({ navigation }) {
-  const [viewPassword, setViewPassword] = React.useState(false)
+export default function Login({ navigation }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const setUser = useSetRecoilState(userState);
+
+  const login = async () => {
+    try {
+      const data = await loginApi.login(username, password);
+      setUser({
+        loggedIn: true,
+        access: data.access,
+        refresh: data.refresh,
+      });
+      setUsername('');
+      setPassword('');
+      setErrorMsg(null);
+      await SecureStore.setItemAsync('access', data.access);
+      navigation.goBack();
+    } catch (error) {
+      setUser({ loggedIn: false, access: null, refresh: null });
+      setErrorMsg('Usuário ou senha inválidos!');
+      await SecureStore.deleteItemAsync('access');
+    }
+  };
+
   return (
     <View style={styles.login}>
       <Image source={logo} style={styles.logo} />
       <TextInput
-        label="Email"
+        label="Usuário"
+        value={username}
+        onChangeText={setUsername}
         backgroundColor="transparent"
         mode="outlined"
         activeOutlineColor="#d32f2f"
@@ -20,6 +52,8 @@ function Login({ navigation }) {
       />
       <TextInput
         label="Password"
+        value={password}
+        onChangeText={setPassword}
         activeOutlineColor="#d32f2f"
         selectionColor="#d32f2f"
         secureTextEntry={viewPassword}
@@ -32,7 +66,7 @@ function Login({ navigation }) {
         icon="arrow-right"
         textColor='white'
         mode="contained-tonal"
-        onPress={() => navigation.navigate("Main")}
+        onPress={() => login()}
       >
         Acessar
       </Button>
@@ -68,5 +102,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
-withTheme;
