@@ -11,8 +11,8 @@ import { userState } from '../recoil/atoms/auth';
 
 export default function Login({ navigation }) {
   const [viewPassword, setViewPassword] = React.useState(false)
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('lulu');
+  const [password, setPassword] = useState('minhasenha1');
   const [errorMsg, setErrorMsg] = useState(null);
 
   const setUser = useSetRecoilState(userState);

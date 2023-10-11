@@ -1,11 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Checkbox, Button, List } from "react-native-paper";
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { pedidoState } from '../recoil/atoms/pedido';
+
 import produtosApi from "../api/produtos";
+import pedidoApi from '../api/pedido'
 
 function Cardapio() {
   const [chawarmas, setChawarmas] = useState([]);
   const [checkedChawarmas, setCheckedChawarmas] = React.useState([]);
+
+  const pedido = useRecoilValue(pedidoState)
+  const setPedido = useSetRecoilState(pedidoState)
+
+  async function salvarPedido() {
+
+    await pedidoApi.salvarPedido(pedido)
+    setPedido({
+      cliente: '',
+      mesa: '',
+      itens: []
+    })
+
+  }
+
+  function addItem(id) {
+    const itens =  [...pedido.itens]
+    itens.push(id)
+    setPedido({
+      cliente: pedido.cliente,
+      mesa: pedido.mesa,
+      itens
+    })
+  }
+
   function changeCheckChawarmas(i) {
     let novoChecked = [...checkedChawarmas];
     novoChecked[i] = !novoChecked[i];
@@ -57,42 +86,46 @@ function Cardapio() {
 
   return (
     <View>
-      <Text style={styles.titulo}>Cardápio</Text>
+      <Text style={styles.titulo}>Cardápio - {pedido.cliente} - {pedido.mesa} - {pedido.itens}</Text>
       <List.AccordionGroup>
         <List.Accordion title="Bebidas" id="1">
-        {bebidas.map((bebidas, i) => (
-            <View style={styles.bebidas}>
+        {bebidas.map((bebida, i) => (
+            <View style={styles.bebidas} key={bebida.id}>
               <Checkbox.Item
-                label={bebidas.titulo}
+                label={bebida.titulo}
                 status={checkedBebidas[i] ? "checked" : "unchecked"}
                 onPress={() => {
                   changeCheckBebidas(i);
+                  addItem(bebida.id)
                 }}
               />
             </View>
           ))}
         </List.Accordion>
         <List.Accordion title="Chawarmas" id="2">
-        {chawarmas.map((chawarmas, i) => (
-            <View style={styles.chawarmas}>
+        {chawarmas.map((chawarma, i) => (
+            <View style={styles.chawarmas} key={chawarma.id}>
               <Checkbox.Item
-                label={chawarmas.titulo}
+                label={chawarma.titulo}
                 status={checkedChawarmas[i] ? "checked" : "unchecked"}
                 onPress={() => {
                   changeCheckChawarmas(i);
+                  addItem(chawarma.id)
+
                 }}
               />
             </View>
           ))}
         </List.Accordion>        
         <List.Accordion title="Porções" id="3">
-        {porcoes.map((porcoes, i) => (
-            <View style={styles.porcoes}>
+        {porcoes.map((porcao, i) => (
+            <View style={styles.porcoes} key={porcao.id}>
               <Checkbox.Item
-                label={porcoes.titulo}
+                label={porcao.titulo}
                 status={checkedPorcoes[i] ? "checked" : "unchecked"}
                 onPress={() => {
                   changeCheckPorcoes(i);
+                  addItem(porcao.id)
                 }}
               />
             </View>
@@ -105,6 +138,7 @@ function Cardapio() {
         buttonColor="#d32f2f"
         icon="arrow-right"
         mode="contained"
+        onPress={()=>salvarPedido()}
         />
     </View>
   );
