@@ -1,141 +1,40 @@
-import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { Card, Text } from "react-native-paper";
+import axios from "axios";
+
+import { pedidoState } from '../recoil/atoms/pedido';
+
+import pedidoApi from '../api/pedido'
 
 function Pedidos({ navigation }) {
-    const pedidos = [
-        {
-            "id": 10,
-            "cliente": "Eduardo",
-            "mesa": "10",
-            "status": "PRODUCAO",
-            "total": 85.0,
-            "itens": [
-                {
-                    "quantidade": 1,
-                    "preco_item": "8.00",
-                    "total": 8.0,
-                    "produto": {
-                        "id": 12,
-                        "titulo": "Fanta 2l",
-                        "isbn": null,
-                        "quantidade": 1,
-                        "preco": "8.00",
-                        "gramas": "2000.00",
-                        "categoria": {
-                            "id": 2,
-                            "descricao": "Bebida"
-                        }
-                    }
-                },
-                {
-                    "quantidade": 1,
-                    "preco_item": "47.00",
-                    "total": 47.0,
-                    "produto": {
-                        "id": 1,
-                        "titulo": "Chawarma Vegano",
-                        "isbn": null,
-                        "quantidade": 1,
-                        "preco": "47.00",
-                        "gramas": "600.00",
-                        "categoria": {
-                            "id": 1,
-                            "descricao": "Chawarma"
-                        }
-                    }
-                },
-                {
-                    "quantidade": 1,
-                    "preco_item": "30.00",
-                    "total": 30.0,
-                    "produto": {
-                        "id": 20,
-                        "titulo": "Porção de Aipim Frito c/ Bacon",
-                        "isbn": null,
-                        "quantidade": 1,
-                        "preco": "30.00",
-                        "gramas": "500.00",
-                        "categoria": {
-                            "id": 3,
-                            "descricao": "Porção"
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "id": 10,
-            "cliente": "Eduardo",
-            "mesa": "10",
-            "status": "PRODUCAO",
-            "total": 85.0,
-            "itens": [
-                {
-                    "quantidade": 1,
-                    "preco_item": "8.00",
-                    "total": 8.0,
-                    "produto": {
-                        "id": 12,
-                        "titulo": "Fanta 2l",
-                        "isbn": null,
-                        "quantidade": 1,
-                        "preco": "8.00",
-                        "gramas": "2000.00",
-                        "categoria": {
-                            "id": 2,
-                            "descricao": "Bebida"
-                        }
-                    }
-                },
-                {
-                    "quantidade": 1,
-                    "preco_item": "47.00",
-                    "total": 47.0,
-                    "produto": {
-                        "id": 1,
-                        "titulo": "Chawarma Vegano",
-                        "isbn": null,
-                        "quantidade": 1,
-                        "preco": "47.00",
-                        "gramas": "600.00",
-                        "categoria": {
-                            "id": 1,
-                            "descricao": "Chawarma"
-                        }
-                    }
-                },
-                {
-                    "quantidade": 1,
-                    "preco_item": "30.00",
-                    "total": 30.0,
-                    "produto": {
-                        "id": 20,
-                        "titulo": "Porção de Aipim Frito c/ Bacon",
-                        "isbn": null,
-                        "quantidade": 1,
-                        "preco": "30.00",
-                        "gramas": "500.00",
-                        "categoria": {
-                            "id": 3,
-                            "descricao": "Porção"
-                        }
-                    }
-                }
-            ]
-        }
-    ]
+
+    const [pedidos, setData] = useState([]);
+    
+    useEffect(() => {
+        axios.get('http://192.168.1.2:19002/api/pedidos/')
+        .then(response => setData(response.data));
+      }, []);
+
     return  (
+        <ScrollView>
         <View style={styles.container}>
-            {pedidos.map((pedido) => (
+            {pedidos.map((pedido, id) => (
                 <>
-                    <Text>{pedido.cliente}</Text>
-                    <Text>{pedido.mesa}</Text>
-                    <Text>{pedido.total.toString()}</Text>
+                <Card style={styles.card}>
+                <Card.Content>
+                <Text style={styles.mesa} variant="titleLarge"># {pedido.mesa}</Text>
+                    <Text style={styles.status}>{pedido.status}</Text>
+                    <Text style={styles.cliente} variant="bodyLarge">{pedido.cliente}</Text>
+                    <Text style={styles.total} >R${pedido.total.toString()},00</Text>
+                </Card.Content>
+                </Card>
                 </>
+
             ))
             }
-            <Text>Pedidos aqui! Em breve....</Text>
         </View>
+        </ScrollView>
     )
 };
 
@@ -143,11 +42,38 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        justifyContent: "center",
-        alignItems: "center",
         padding: 20,
         width: '100%'
+      },
+
+      card: {
+        flex: 1,
+        textAlign: 'center',
+        width: "100%",
+        height: "15%",
+        marginBottom: "10%",
+        backgroundColor: "white"
+      },
+
+      mesa: {
+        textAlign: 'center',
+      },
+
+      total: {
+        textAlign: 'right',
+        marginTop: "5%",
+        fontSize: "25px",
+      },
+
+      status: {
+        
+        textAlign: 'right',
+      },
+
+      cliente: {
+        fontSize: "20px",
       }
+
 });
 
 export default Pedidos;
