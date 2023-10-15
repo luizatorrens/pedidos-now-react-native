@@ -3,10 +3,6 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import axios from "axios";
 
-import { pedidoState } from '../recoil/atoms/pedido';
-
-import pedidoApi from '../api/pedido'
-
 function Pedidos({ navigation }) {
 
     const [pedidos, setData] = useState([]);
