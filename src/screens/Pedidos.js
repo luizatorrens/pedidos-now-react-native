@@ -3,12 +3,12 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import axios from "axios";
 
-function Pedidos({ navigation }) {
+function Pedidos() {
 
     const [pedidos, setData] = useState([]);
     
     useEffect(() => {
-        axios.get('http://192.168.1.2:19002/api/pedidos/')
+        axios.get('http://191.52.55.88:19002/api/pedidos/')
         .then(response => setData(response.data));
       }, []);
 
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
       total: {
         textAlign: 'right',
         marginTop: "5%",
-        fontSize: "25px",
       },
 
       status: {
@@ -66,9 +65,6 @@ const styles = StyleSheet.create({
         textAlign: 'right',
       },
 
-      cliente: {
-        fontSize: "20px",
-      }
 
 });
 
